@@ -1,0 +1,140 @@
+properties:
+  - property: Current_program_phase
+    sensor:
+      device_class: enum
+      options:
+        0: "Not available"
+        1: "Weigh"
+        2: "Prewash"
+        3: "Wash"
+        4: "Rinsing"
+        7: "Spinning"
+        8: "Drying"
+        10: "Finished"
+        11: "Delay"
+  - property: DelayEndTime
+    icon: mdi:clock-outline
+    entity_category: config
+    number:
+      min_value: 1
+      max_value: 24
+      unit: h
+  - property: DelayEndTime_Minute
+    icon: mdi:clock-outline
+    entity_category: config
+    select:
+      options:
+        0: "0"
+        30: "30"
+
+  # --- Delay machinery, read-only until verified ---
+  - property: SkipDelayProcess
+    # Write 1 (via set_value) while a delay is armed to test "skip wait, start now".
+    # If confirmed, promote to: buttons: [{key: skip_delay, write: {SkipDelayProcess: 1}}]
+    icon: mdi:play-speed
+    entity_category: diagnostic
+    sensor:
+      read_only: true
+  - property: Cancle_DelayEnd
+    icon: mdi:clock-remove
+    entity_category: diagnostic
+    sensor:
+      read_only: true
+  - property: Remote_hold
+    icon: mdi:remote
+    entity_category: diagnostic
+    sensor:
+      read_only: true
+  # --- Washer-dryer drying controls: exposed for observation ---
+  # These exist in the base mapping as disabled diagnostics; enabling here.
+  # Watch values while toggling each feature on the panel; when a property
+  # proves to be a clean 0/1 toggle, replace the override with: switch: {}
+  - property: DryingSwitch
+    icon: mdi:tumble-dryer
+    entity_category: diagnostic
+
+  - property: DryModel
+    icon: mdi:tumble-dryer
+    entity_category: diagnostic
+    sensor:
+      device_class: enum
+      read_only: true
+      options:
+        0: "Wash"
+        1: "Wash and Dry"
+        2: "Dry"
+
+  - property: dry_lever
+    icon: mdi:tune-variant
+    entity_category: diagnostic
+
+  - property: Gentle_Dry
+    icon: mdi:tumble-dryer
+    entity_category: diagnostic
+
+  - property: WindDrying
+    icon: mdi:fan
+    entity_category: diagnostic
+
+  - property: SingleAirDry
+    icon: mdi:air-filter
+    entity_category: diagnostic
+
+  - property: Washing_drying_linkage_state
+    icon: mdi:link
+    entity_category: diagnostic
+  - property: ExtraRinseNum
+    select:
+      options:
+        0: "0"
+        1: "1"
+        2: "2"
+        3: "3"
+        4: "4"
+        5: "5"
+  - property: Selected_program_ID
+    select:
+      options:
+        1: "Cotton dry"
+        2: "Synthetic dry"
+        4: "Refresh"
+        6: "Drum clean"
+        7: "Cotton"
+        8: "Synthetic"
+        9: "Eco 40-60"
+        10: "Wool"
+        11: "Quick 15"
+        14: "Spin"
+        15: "Allergy care"
+        16: "Baby care"
+        20: "Rinse and spin"
+        22: "Wash and dry 49"
+        41: "Power 49"
+        42: "Auto"
+        44: "Bedding"
+        52: "Power 30"
+        56: "Pets"
+        57: "Full load 49"
+  - property: Spin_speed_rpm
+    select:
+      options:
+        14: "1400"
+        12: "1200"
+        10: "1000"
+        80: "800"
+        60: "600"
+        0: none
+  - property: dry_time
+    select:
+      options:
+        1: "Iron"
+        2: "Cupboard"
+        3: "Extra dry"
+        30: "30 mins"
+        40: "40 mins"
+        50: "50 mins"
+        60: "60 mins"
+        90: "90 mins"
+        120: "120 mins"
+        180: "180 mins"
+        240: "240 mins"
